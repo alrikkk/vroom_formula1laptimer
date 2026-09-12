@@ -20,12 +20,13 @@ __pycache__/
 credentials.json
 secrets.json
 
-# IDE and OS
+# IDE, OS, and Deployment
 .vscode/
 .idea/
 .DS_Store
 *.swp
 *~
+.vercel/
 
 # Temporary / local dev artifacts
 okhw.png
