@@ -1,0 +1,67 @@
+/**
+ * VROOM Animations, Micro-Interactions & Responsive Breakpoints
+ */
+
+/* Micro Transitions & Keyframes */
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.9); }
+}
+
+.status-dot.active {
+  animation: pulseGreen 2.4s infinite ease-in-out;
+}
+
+/* ==================================================
+   RESPONSIVE BREAKPOINTS
+================================================== */
+@media (max-width: 992px) {
+  .footer-inner-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .nav-header {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .nav-links-row {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--canvas-surface);
+    border-bottom: var(--border-hairline);
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-links-row.mobile-open {
+    display: flex;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-inner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-right-status .status-badge-item {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

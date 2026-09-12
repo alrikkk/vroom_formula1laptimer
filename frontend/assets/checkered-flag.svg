@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" width="120" height="100">
+  <!-- Flag Mast -->
+  <line x1="20" y1="12" x2="20" y2="92" stroke="#475569" stroke-width="3" stroke-linecap="round" />
+  <circle cx="20" cy="12" r="3.5" fill="#f59e0b" />
+
+  <!-- Checkered Flag Waving Mesh (Grid of Black & White squares) -->
+  <g transform="translate(20, 16)">
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="14" height="12" fill="#090d16" />
+    <rect x="14" y="0" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="28" y="0" width="14" height="12" fill="#090d16" />
+    <rect x="42" y="0" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="56" y="0" width="14" height="12" fill="#090d16" />
+
+    <!-- Row 2 -->
+    <rect x="0" y="12" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="14" y="12" width="14" height="12" fill="#090d16" />
+    <rect x="28" y="12" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="42" y="12" width="14" height="12" fill="#090d16" />
+    <rect x="56" y="12" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+
+    <!-- Row 3 -->
+    <rect x="0" y="24" width="14" height="12" fill="#090d16" />
+    <rect x="14" y="24" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="28" y="24" width="14" height="12" fill="#090d16" />
+    <rect x="42" y="24" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="56" y="24" width="14" height="12" fill="#090d16" />
+
+    <!-- Row 4 -->
+    <rect x="0" y="36" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="14" y="36" width="14" height="12" fill="#090d16" />
+    <rect x="28" y="36" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+    <rect x="42" y="36" width="14" height="12" fill="#090d16" />
+    <rect x="56" y="36" width="14" height="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5" />
+  </g>
+</svg>

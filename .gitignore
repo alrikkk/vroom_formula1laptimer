@@ -1,0 +1,42 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*~
+
+# Temporary / local dev artifacts
+okhw.png
+
+# Unused raw Kaggle archive tables (not required for VROOM pipeline)
+circuits.csv
+constructor_results.csv
+constructor_standings.csv
+constructors.csv
+driver_standings.csv
+qualifying.csv
+seasons.csv
+sprint_results.csv
+status.csv

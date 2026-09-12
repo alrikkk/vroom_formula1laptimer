@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 100" width="160" height="100">
+  <defs>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Technical Frame Background -->
+  <rect x="2" y="2" width="156" height="96" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
+
+  <!-- Header line -->
+  <line x1="2" y1="20" x2="158" y2="20" stroke="#f1f5f9" stroke-width="1" />
+  <circle cx="10" cy="11" r="3" fill="#10b981" />
+  <text x="18" y="14" font-family="-apple-system, SF Mono, monospace" font-size="7" font-weight="700" fill="#475569" letter-spacing="0.5">TELEMETRY WAVEFORM // SPEED TRAP</text>
+
+  <!-- Grid lines -->
+  <line x1="10" y1="40" x2="150" y2="40" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2 3" />
+  <line x1="10" y1="60" x2="150" y2="60" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2 3" />
+  <line x1="10" y1="80" x2="150" y2="80" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2 3" />
+
+  <!-- Telemetry Curve (Throttle/Speed trace) -->
+  <path d="M 12 82 Q 28 80 42 58 T 68 34 T 96 36 T 120 72 T 148 42 L 148 88 L 12 88 Z" fill="url(#waveGrad)" />
+  <path d="M 12 82 Q 28 80 42 58 T 68 34 T 96 36 T 120 72 T 148 42" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Data point dot -->
+  <circle cx="148" cy="42" r="3" fill="#e10600" />
+  <text x="146" y="34" font-family="-apple-system, SF Mono, monospace" font-size="6.5" font-weight="700" fill="#090d16" text-anchor="end">318.4 KM/H</text>
+</svg>

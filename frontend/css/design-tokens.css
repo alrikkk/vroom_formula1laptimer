@@ -1,0 +1,63 @@
+/**
+ * VROOM Design System: Reference-Driven (Heyclicky x F1 Telemetry World)
+ * Centralized Design Tokens
+ */
+
+:root {
+  /* --- Canvas & Surface Palette (Clean Off-White) --- */
+  --canvas-bg: #fdfdfc;
+  --canvas-surface: #ffffff;
+  --canvas-subtle: #f6f7f9;
+  --canvas-sunken: #eef2f6;
+
+  /* --- Technical Borders & Hairlines --- */
+  --border-hairline: 1px solid rgba(15, 23, 42, 0.08);
+  --border-window: 1px solid rgba(15, 23, 42, 0.14);
+  --border-subtle: 1px solid rgba(15, 23, 42, 0.1);
+
+  /* --- Text & Contrast Hierarchy --- */
+  --text-primary: #090d16;        /* Deep ink slate */
+  --text-secondary: #334155;      /* Crisp editorial body text (slate-700) */
+  --text-muted: #475569;          /* Technical metadata, annotations, timestamps (slate-600) */
+  --text-accent: #0369a1;         /* Telemetry links & cyan accents (sky-700) */
+  --text-on-dark: #ffffff;
+
+  /* --- Motorsport & Reference Accents --- */
+  --accent-red: #dc2626;          /* Official FIA red / warning */
+  --accent-cyan: #0369a1;         /* Telemetry cyan (accessible high-contrast sky-700) */
+  --accent-sky: #0284c7;          /* Aero sky blue */
+  --accent-green: #047857;        /* Green flag / optimal pace (accessible emerald-700) */
+  --accent-amber: #b45309;        /* Sector yellow / warning (accessible amber-700) */
+  --mac-red: #ff5f56;             /* Traffic light red */
+  --mac-yellow: #ffbd2e;          /* Traffic light yellow */
+  --mac-green: #27c93f;           /* Traffic light green */
+
+  /* --- Typography Stack --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* --- Typography Scales --- */
+  --font-size-hero: clamp(3.6rem, 11vw, 7.8rem);
+  --font-size-h1: clamp(2.2rem, 5vw, 3.6rem);
+  --font-size-h2: clamp(1.4rem, 2.8vw, 2.2rem);
+  --font-size-body: 1rem;
+  --font-size-meta: 0.78rem;
+  --font-size-micro: 0.68rem;
+
+  /* --- Shadows (Authentic Window Elevation) --- */
+  --shadow-window: 0 20px 45px -10px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-window-hover: 0 26px 55px -8px rgba(15, 23, 42, 0.18), 0 4px 10px rgba(15, 23, 42, 0.06);
+  --shadow-pill: 0 4px 14px rgba(15, 23, 42, 0.12);
+  --shadow-bubble: 0 6px 20px rgba(2, 132, 199, 0.18);
+
+  /* --- Geometry --- */
+  --radius-window: 8px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-pill: 9999px;
+
+  /* --- Transitions --- */
+  --trans-fast: 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  --trans-smooth: 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}

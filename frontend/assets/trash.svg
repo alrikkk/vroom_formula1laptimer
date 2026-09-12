@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 64" width="54" height="64">
+  <defs>
+    <linearGradient id="canGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="30%" stop-color="#e2e8f0" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.7" />
+    </linearGradient>
+  </defs>
+  <!-- Rim -->
+  <ellipse cx="27" cy="10" rx="22" ry="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2" />
+  <!-- Crumpled paper inside -->
+  <polygon points="18,10 24,4 32,7 28,12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="0.8" />
+  <polygon points="26,8 34,2 40,8 33,12" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" />
+  <!-- Bin Body -->
+  <path d="M 6 10 L 11 56 Q 12 60 16 60 L 38 60 Q 42 60 43 56 L 48 10 Z" fill="url(#canGlass)" stroke="#94a3b8" stroke-width="1.2" />
+  <!-- Gloss stripe -->
+  <path d="M 12 12 L 15 54 L 20 54 L 17 12 Z" fill="#ffffff" opacity="0.5" />
+</svg>

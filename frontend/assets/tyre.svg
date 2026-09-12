@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <!-- Tire rubber gradient -->
+    <radialGradient id="rubberGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2d3748" />
+      <stop offset="65%" stop-color="#1a202c" />
+      <stop offset="90%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </radialGradient>
+    <!-- Specular gloss reflection -->
+    <linearGradient id="glossGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.2" />
+    </linearGradient>
+    <!-- Rim metallic gradient -->
+    <radialGradient id="rimGrad" cx="45%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#e2e8f0" />
+      <stop offset="60%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#475569" />
+    </radialGradient>
+  </defs>
+
+  <!-- Outer Tire Rubber -->
+  <circle cx="80" cy="80" r="74" fill="url(#rubberGrad)" stroke="#090d16" stroke-width="2" />
+
+  <!-- Tread / Sidewall Grooves -->
+  <circle cx="80" cy="80" r="71" fill="none" stroke="#334155" stroke-width="0.8" opacity="0.6" />
+  <circle cx="80" cy="80" r="54" fill="none" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- Hard Compound White Stripe (Pirelli C2) -->
+  <circle cx="80" cy="80" r="62" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.9" />
+  <circle cx="80" cy="80" r="62" fill="none" stroke="#0ea5e9" stroke-width="1" stroke-dasharray="8 20" opacity="0.8" />
+
+  <!-- Wheel Rim Hub -->
+  <circle cx="80" cy="80" r="44" fill="url(#rimGrad)" stroke="#1e293b" stroke-width="1.5" />
+  <circle cx="80" cy="80" r="28" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+
+  <!-- Center Nut & Locking Ring -->
+  <circle cx="80" cy="80" r="14" fill="#e10600" stroke="#991b1b" stroke-width="1.5" />
+  <circle cx="80" cy="80" r="6" fill="#0f172a" />
+
+  <!-- Wheel Spokes (BBS 13-inch F1 wheel geometry) -->
+  <g stroke="#334155" stroke-width="2.5" stroke-linecap="round">
+    <line x1="80" y1="36" x2="80" y2="52" />
+    <line x1="80" y1="108" x2="80" y2="124" />
+    <line x1="36" y1="80" x2="52" y2="80" />
+    <line x1="108" y1="80" x2="124" y2="80" />
+    <line x1="49" y1="49" x2="60" y2="60" />
+    <line x1="111" y1="111" x2="100" y2="100" />
+    <line x1="49" y1="111" x2="60" y2="100" />
+    <line x1="111" y1="49" x2="100" y2="60" />
+  </g>
+
+  <!-- Specular Sheen Overlay -->
+  <path d="M 20 50 A 72 72 0 0 1 120 18 Q 80 50 20 50 Z" fill="url(#glossGrad)" opacity="0.75" />
+
+  <!-- Sidewall Technical Text -->
+  <text x="80" y="24" font-family="-apple-system, SF Mono, sans-serif" font-size="6" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">PIRELLI P ZERO</text>
+  <text x="80" y="142" font-family="-apple-system, SF Mono, sans-serif" font-size="5.5" font-weight="600" fill="#94a3b8" text-anchor="middle" letter-spacing="0.8">HARD // C2 COMPOUND</text>
+</svg>

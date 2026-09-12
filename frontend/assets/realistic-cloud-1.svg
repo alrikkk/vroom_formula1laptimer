@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260">
+  <defs>
+    <!-- Soft atmospheric blur for realistic volumetric puff dispersion -->
+    <filter id="cloudBlur1" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Core sunlit white gradient -->
+    <radialGradient id="sunlitCore1" cx="48%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98" />
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="85%" stop-color="#e0f2fe" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#bae6fd" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Soft diffuse ambient body gradient -->
+    <radialGradient id="ambientBody1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#f0f9ff" stop-opacity="0.55" />
+      <stop offset="90%" stop-color="#bae6fd" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Upper crest highlight -->
+    <radialGradient id="crestHighlight1" cx="50%" cy="25%" r="45%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="70%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <g filter="url(#cloudBlur1)">
+    <!-- Layer 1: Base diffuse mass -->
+    <ellipse cx="320" cy="160" rx="220" ry="60" fill="url(#ambientBody1)" />
+    <ellipse cx="220" cy="155" rx="140" ry="55" fill="url(#ambientBody1)" />
+    <ellipse cx="420" cy="155" rx="150" ry="55" fill="url(#ambientBody1)" />
+
+    <!-- Layer 2: Volumetric billowy lobes -->
+    <ellipse cx="310" cy="120" rx="110" ry="75" fill="url(#sunlitCore1)" />
+    <ellipse cx="230" cy="130" rx="90" ry="65" fill="url(#sunlitCore1)" />
+    <ellipse cx="395" cy="130" rx="95" ry="65" fill="url(#sunlitCore1)" />
+    <ellipse cx="160" cy="150" rx="75" ry="50" fill="url(#sunlitCore1)" />
+    <ellipse cx="475" cy="150" rx="80" ry="50" fill="url(#sunlitCore1)" />
+    <ellipse cx="110" cy="165" rx="55" ry="35" fill="url(#sunlitCore1)" />
+    <ellipse cx="530" cy="165" rx="60" ry="35" fill="url(#sunlitCore1)" />
+
+    <!-- Layer 3: Sunlit crown highlights -->
+    <ellipse cx="310" cy="100" rx="80" ry="45" fill="url(#crestHighlight1)" />
+    <ellipse cx="235" cy="115" rx="65" ry="40" fill="url(#crestHighlight1)" />
+    <ellipse cx="390" cy="115" rx="70" ry="40" fill="url(#crestHighlight1)" />
+  </g>
+</svg>

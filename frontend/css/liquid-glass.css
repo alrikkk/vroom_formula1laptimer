@@ -1,0 +1,305 @@
+/**
+ * VROOM Liquid Glass Design System
+ * Apple Liquid Glass-inspired material layer for selective F1 engineering workstation surfaces.
+ * 
+ * Clean 2-Layer Component Architecture:
+ * HOST (.vroom-glass)
+ * ├── .vroom-glass-canvas (material layer: absolute, inset: 0, z-index: 0, pointer-events: none)
+ * └── foreground content (native DOM: position: relative, z-index: 1, normal opacity & contrast)
+ */
+
+/* ==================================================
+   1. BASE LIQUID GLASS HOSTS & CANVAS LAYERING
+================================================== */
+.vroom-glass {
+  position: relative !important;
+  isolation: isolate;
+}
+
+/* The WebGL Canvas sits directly behind the element's DOM contents */
+.vroom-glass-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+  display: block;
+}
+
+/* Ensure all interactive / content children sit above the glass canvas */
+.vroom-glass > *:not(.vroom-glass-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Container headers & bodies inside glass windows */
+.vroom-glass .mac-window-header {
+  background: rgba(248, 250, 252, 0.65) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.vroom-glass.vroom-glass-window-dark .mac-window-header {
+  background: rgba(15, 23, 42, 0.70) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.vroom-glass.vroom-glass-window-dark .mac-window-title {
+  color: #cbd5e1 !important;
+  font-weight: 600;
+}
+
+.vroom-glass .mac-window-body {
+  background: transparent !important;
+}
+
+.vroom-glass .workstation-form-body {
+  background: transparent !important;
+}
+
+.vroom-glass .timing-monitor-box {
+  background: transparent !important;
+}
+
+/* ==================================================
+   2. PRIMARY GLASS: HEADER & NAVIGATION (CSS MATERIAL)
+   Thin transparent physical surface floating above canvas.
+   Zero WebGL canvas injected, ensuring 100% DOM stability.
+================================================== */
+.nav-header.vroom-glass {
+  background: rgba(253, 253, 252, 0.76) !important;
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.04),
+              inset 0 -1px 0 0 rgba(255, 255, 255, 0.7);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ==================================================
+   3. PRIMARY GLASS: FLOATING TELEMETRY & MACOS WINDOWS
+================================================== */
+.mac-window.vroom-glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.12),
+              0 2px 6px rgba(15, 23, 42, 0.04),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.mac-window.vroom-glass.vroom-glass-window-dark {
+  background: rgba(9, 13, 22, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.4),
+              0 2px 6px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* ==================================================
+   3B. SKY BENCHMARK LIQUID GLASS WINDOWS
+   Applied strictly to the 3 windows in the sky section:
+   1. Left: Ridge Regression window (.sky-model-card.sky-glass-window)
+   2. Right: Random Forest window (.sky-model-card.sky-glass-window)
+   3. Bottom: Collinearity finding terminal (.sky-terminal-window.sky-glass-window)
+================================================== */
+.sky-model-card.sky-glass-window {
+  position: relative !important;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.74) !important;
+  backdrop-filter: blur(12px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(130%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  border-radius: var(--radius-window);
+  box-shadow: 0 20px 45px -8px rgba(2, 132, 199, 0.22),
+              0 2px 8px rgba(15, 23, 42, 0.05),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.95),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.45) !important;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform var(--trans-smooth), box-shadow var(--trans-smooth);
+}
+
+.sky-model-card.sky-glass-window:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 26px 52px -6px rgba(2, 132, 199, 0.28),
+              0 4px 12px rgba(15, 23, 42, 0.08),
+              inset 0 1px 0 0 rgba(255, 255, 255, 1),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.55) !important;
+}
+
+.sky-model-card.sky-glass-window .sky-card-header {
+  background: rgba(248, 250, 252, 0.60) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.sky-model-card.sky-glass-window .sky-card-body {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+.sky-terminal-window.sky-glass-window {
+  position: relative !important;
+  isolation: isolate;
+  background: rgba(9, 13, 22, 0.78) !important;
+  backdrop-filter: blur(14px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(130%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: var(--radius-window);
+  box-shadow: 0 25px 55px -10px rgba(0, 0, 0, 0.45),
+              0 4px 12px rgba(2, 132, 199, 0.15),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+  overflow: hidden;
+  z-index: 2;
+  transition: transform var(--trans-smooth), box-shadow var(--trans-smooth);
+}
+
+.sky-terminal-window.sky-glass-window:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 30px 60px -8px rgba(0, 0, 0, 0.52),
+              0 6px 16px rgba(2, 132, 199, 0.2),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.12) !important;
+}
+
+.sky-terminal-window.sky-glass-window .terminal-header {
+  background: rgba(15, 23, 42, 0.65) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.sky-terminal-window.sky-glass-window .terminal-body {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* Retain high text contrast inside dark glass windows */
+.vroom-glass-window-dark .mac-window-body {
+  color: #f8fafc;
+}
+
+.vroom-glass-window-dark .timing-monitor-box {
+  color: #ffffff;
+}
+
+/* ==================================================
+   4. SECONDARY & VERY SUBTLE GLASS: CONTROLS & PILLS
+================================================== */
+/* Small Status Indicator in Header */
+.header-status-indicator.vroom-glass-pill {
+  position: relative;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Predictor Selector Controls */
+.vroom-select.vroom-glass-control {
+  background: rgba(248, 250, 252, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04),
+              inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all var(--trans-fast);
+}
+
+.vroom-select.vroom-glass-control:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.vroom-select.vroom-glass-control:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15),
+              inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Predictor Value Badges */
+.vroom-val-badge.vroom-glass-badge {
+  background: rgba(224, 242, 254, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(3, 105, 161, 0.2);
+  box-shadow: 0 1px 4px rgba(2, 132, 199, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Slider Track & Thumb Glass Styling */
+.vroom-slider-wrap.vroom-glass-control {
+  position: relative;
+}
+
+.vroom-slider-wrap.vroom-glass-control .vroom-slider {
+  background: rgba(226, 232, 240, 0.70);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.1);
+}
+
+.vroom-slider-wrap.vroom-glass-control .vroom-slider::-webkit-slider-thumb {
+  background: linear-gradient(145deg, #0284c7, #0369a1);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 3px 8px rgba(2, 132, 199, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Radio Toggle Pill Group */
+.vroom-radio-options.vroom-glass-control {
+  padding: 6px 12px;
+  background: rgba(241, 245, 249, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+/* Ticker Bar Badge Subtle Glass Touch */
+.ticker-badge.vroom-glass-badge {
+  padding: 2px 8px;
+  background: rgba(2, 132, 199, 0.14);
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  border-radius: 3px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ==================================================
+   5. GRACEFUL CSS FALLBACK (NO WEBGL)
+================================================== */
+.vroom-no-webgl .mac-window.vroom-glass,
+.vroom-glass-fallback {
+  background: rgba(253, 253, 252, 0.88) !important;
+  backdrop-filter: blur(12px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(130%) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  box-shadow: 0 18px 40px -10px rgba(15, 23, 42, 0.12),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.vroom-no-webgl .mac-window.vroom-glass.vroom-glass-window-dark,
+.vroom-glass-fallback.vroom-glass-window-dark {
+  background: rgba(9, 13, 22, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.2) !important;
+}

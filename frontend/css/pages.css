@@ -1,0 +1,825 @@
+/**
+ * VROOM Pages: Reference-Driven Editorial F1 Telemetry Canvas
+ */
+
+/* ==================================================
+   SHARED EDITORIAL TYPOGRAPHY PRIMITIVES
+================================================== */
+.editorial-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.editorial-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  text-transform: lowercase;
+  margin-bottom: 1.25rem;
+}
+
+.editorial-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 620px;
+}
+
+/* ==================================================
+   SCENE 1: THE ART-DIRECTED HERO CANVAS
+================================================== */
+.home-hero-world {
+  position: relative;
+  min-height: 88vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 3.5rem;
+  padding: 5rem 1rem 8rem;
+}
+
+.hero-editorial-group {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-tag-line,
+.hero-logo-heading,
+.hero-strapline,
+.hero-actions-row,
+.hero-grounded-meta {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-tag-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.hero-logo-heading {
+  margin: 0.5rem 0 1.25rem 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.hero-logo-img {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  aspect-ratio: 1140 / 465;
+  object-fit: contain;
+}
+
+.hero-strapline {
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+
+.hero-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.25rem;
+}
+
+.btn-pill-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+.btn-pill-ghost:hover {
+  background: #f1f5f9;
+  border-color: rgba(15, 23, 42, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero-grounded-meta {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Asymmetric Hero Objects */
+.hero-circuit-win {
+  width: 100%;
+  max-width: 440px;
+  justify-self: end;
+}
+
+.circuit-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.circuit-meta-item span {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+.hero-tyre-obj {
+  position: absolute;
+  top: calc(100% + 1.25rem);
+  left: 270px;
+  transform: translateX(-50%);
+  width: 130px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-tyre-img {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  aspect-ratio: 505 / 494;
+  display: block;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+  user-select: none;
+  animation: starFloat 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes starFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate3d(2px, -7px, 0) rotate(2deg) scale(1.01);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(0.5deg) scale(1.02);
+  }
+  75% {
+    transform: translate3d(-2px, -5px, 0) rotate(-1.8deg) scale(1.01);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+/* ==================================================
+   SCENE 2: THE LAP (EDITORIAL PAUSE & PHYSICAL FORCES)
+================================================== */
+.lap-editorial-scene {
+  margin: 11rem 0 12rem;
+}
+
+.lap-solitary-text {
+  max-width: 720px;
+  margin-bottom: 4.5rem;
+}
+
+.lap-forces-composition {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.force-artifact {
+  background: var(--canvas-surface);
+  border: var(--border-subtle);
+  border-radius: var(--radius-window);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-window);
+}
+
+.force-delta {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+}
+.force-delta.negative { color: var(--accent-green); }
+.force-delta.positive { color: var(--accent-red); }
+.force-delta.neutral { color: var(--accent-blue); }
+
+.force-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: lowercase;
+  margin-bottom: 0.65rem;
+}
+
+.force-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.force-formula {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #475569;
+  background: #f8fafc;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed #e2e8f0;
+}
+
+.wheel-artifact-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.cockpit-artifact-img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 1024 / 512;
+  object-fit: contain;
+  margin: 0 auto;
+  pointer-events: none;
+  user-select: none;
+  animation: cockpitArtifactFloat 8.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes cockpitArtifactFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(0, -4px, 0) rotate(0.6deg);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate3d(0, -2px, 0) rotate(-0.5deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* ==================================================
+   SCENE 3: DATA INTEGRITY (705 -> 683 LAPS)
+================================================== */
+.audit-editorial-scene {
+  margin: 11rem 0 12rem;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+
+.audit-rules-cascade {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audit-rule-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1rem 1.25rem;
+  background: var(--canvas-surface);
+  border: var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.audit-rule-row.highlight {
+  border-color: var(--accent-green);
+  background: #f0fdf4;
+}
+
+.rule-badge {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  min-width: 44px;
+  text-align: center;
+}
+.rule-badge.red { background: #fee2e2; color: #b91c1c; }
+.rule-badge.green { background: #dcfce7; color: #15803d; }
+
+.rule-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.rule-detail {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.audit-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.audit-terminal-win {
+  width: 100%;
+}
+
+.helmet-artifact-wrap {
+  align-self: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.driver-artifact-img {
+  width: 145px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 453 / 551;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+  user-select: none;
+  animation: driverArtifactFloat 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes driverArtifactFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(0, -6px, 0) rotate(1.2deg);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate3d(0, -3px, 0) rotate(-1deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* ==================================================
+   SCENE 4: CHRONOLOGICAL STINT SPLIT
+================================================== */
+.split-editorial-scene {
+  margin: 11rem 0 12rem;
+}
+
+.split-header-wrap {
+  max-width: 720px;
+  margin-bottom: 3.5rem;
+}
+
+.split-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.split-win.highlight {
+  border-color: #86efac;
+}
+
+/* ==================================================
+   SCENE 5: VERSTAPPEN MEDIA BROADCAST WINDOW
+================================================== */
+.media-broadcast-scene {
+  margin: 11rem 0 12rem;
+}
+
+.broadcast-editorial-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem;
+}
+
+.broadcast-editorial-header .editorial-subtitle {
+  margin: 0 auto;
+}
+
+.broadcast-window-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.broadcast-media-window {
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.yoshi-artifact-obj {
+  position: absolute;
+  top: 40px;
+  left: calc(100% + 24px);
+  width: 145px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.yoshi-artifact-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 617 / 649;
+  object-fit: contain;
+  border-radius: var(--radius-window);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  user-select: none;
+  animation: yoshiArtifactFloat 8.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes yoshiArtifactFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(0, -4px, 0) rotate(0.5deg);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0) rotate(0deg);
+  }
+  75% {
+    transform: translate3d(0, -2px, 0) rotate(-0.5deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+.broadcast-media-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.broadcast-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-label {
+  color: #475569;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.stat-value.highlight-cyan {
+  color: var(--accent-cyan);
+  font-weight: 800;
+}
+
+/* ==================================================
+   SCENE 6: MODEL BENCHMARK (SKY ATMOSPHERE)
+================================================== */
+.sky-benchmark-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 860px;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.sky-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: 0.05em;
+}
+.sky-badge.best {
+  color: #0369a1;
+}
+
+.sky-card-notes {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.sky-card-sub {
+  color: #0f172a !important;
+  font-weight: 500;
+}
+
+.sky-card-metric-label {
+  color: #0f172a !important;
+  font-weight: 600;
+}
+
+.accent-blue {
+  color: #0284c7;
+}
+
+/* Mario Kart Retro Floating Artifact */
+.mario-artifact-obj {
+  position: absolute;
+  top: 36px;
+  left: 48px;
+  width: 180px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.mario-artifact-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 597 / 335;
+  object-fit: contain;
+  border-radius: var(--radius-window);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08);
+  user-select: none;
+  transform: rotate(-4deg);
+  animation: marioArtifactFloat 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes marioArtifactFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0) rotate(-3deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+}
+
+/* ==================================================
+   SCENE 7: TRANSITION & WORKSTATION CTA
+================================================== */
+.transition-cta-section {
+  text-align: center;
+  max-width: 680px;
+  margin: 10rem auto 8rem;
+}
+
+.transition-cta-section .editorial-subtitle {
+  margin: 0 auto 2rem;
+}
+
+.transition-cta-section .pill-button-pair {
+  justify-content: center;
+}
+
+/* ==================================================
+   VIEW 2: PREDICTOR WORKSTATION PAGE LAYOUT
+================================================== */
+.page-editorial-header {
+  margin-bottom: 3.5rem;
+}
+
+.predictor-workstation-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* ==================================================
+   VIEW 3: RACE LAB TELEMETRY ARCHIVE LAYOUT
+================================================== */
+.racelab-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.racelab-archive-table-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* ==================================================
+   VIEW 4: METHODOLOGY BLUEPRINT LAYOUT
+================================================== */
+.methodology-page-layout {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* ==================================================
+   RESPONSIVE REFINEMENTS
+================================================== */
+@media (max-width: 992px) {
+  .home-hero-world {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 3rem 0 5rem;
+  }
+  
+  .hero-circuit-win {
+    justify-self: center;
+  }
+  
+  .hero-tyre-obj {
+    position: static;
+    margin: 2rem auto 0;
+    transform: none;
+    width: 115px;
+  }
+
+  .lap-forces-composition {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .audit-editorial-scene {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .split-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .broadcast-media-footer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sky-benchmark-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .predictor-workstation-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .archive-stat-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .blueprint-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .driver-artifact-img {
+    width: 125px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-tyre-obj {
+    width: 95px;
+    margin: 1.5rem auto 0;
+  }
+
+  .driver-artifact-img {
+    width: 105px;
+  }
+
+  .archive-stat-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1250px) {
+  .yoshi-artifact-obj {
+    width: 105px;
+    left: calc(100% + 14px);
+    top: 40px;
+  }
+}
+
+@media (max-width: 1249px) and (min-width: 1150px) {
+  .yoshi-artifact-obj {
+    width: 75px;
+    left: calc(100% + 8px);
+    top: 40px;
+  }
+}
+
+@media (max-width: 1149px) {
+  .yoshi-artifact-obj {
+    top: -75px;
+    right: 15px;
+    left: auto;
+    width: 68px;
+  }
+}
+
+@media (max-width: 640px) {
+  .yoshi-artifact-obj {
+    top: -70px;
+    right: 8px;
+    width: 54px;
+  }
+}
+
+@media (max-width: 1249px) and (min-width: 993px) {
+  .mario-artifact-obj {
+    width: 150px;
+    top: 28px;
+    left: 32px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mario-artifact-obj {
+    width: 120px;
+    top: 22px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mario-artifact-obj {
+    width: 85px;
+    top: 16px;
+    left: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tyre-img,
+  .driver-artifact-img,
+  .cockpit-artifact-img,
+  .yoshi-artifact-img {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .mario-artifact-img {
+    animation: none !important;
+    transform: rotate(-4deg) !important;
+  }
+}
+

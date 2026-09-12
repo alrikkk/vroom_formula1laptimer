@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140" width="160" height="140">
+  <defs>
+    <!-- Helmet Shell Gradient -->
+    <linearGradient id="helmetShell" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#cbd5e1" />
+    </linearGradient>
+    <!-- Visor Iridium Gradient -->
+    <linearGradient id="visorGrad" x1="0%" y1="0%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="40%" stop-color="#0ea5e9" />
+      <stop offset="70%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="visorSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Helmet Outer Shell Profile -->
+  <path d="M 28 85 C 24 50, 45 16, 88 16 C 130 16, 146 45, 146 80 C 146 105, 132 120, 114 120 C 85 120, 68 120, 48 118 C 32 116, 28 100, 28 85 Z" fill="url(#helmetShell)" stroke="#090d16" stroke-width="2.5" stroke-linejoin="round" />
+
+  <!-- Chin Guard & Lower Aerodynamic Lip -->
+  <path d="M 48 118 C 36 116, 32 105, 32 92 L 62 92 C 64 105, 75 118, 92 118 Z" fill="#0f172a" stroke="#090d16" stroke-width="1.5" />
+
+  <!-- Top Aero Scoop / Vent -->
+  <path d="M 72 16 Q 88 12 104 16 L 100 22 Q 86 18 74 22 Z" fill="#e10600" />
+
+  <!-- Racing Livery Stripes (Cyan & Red) -->
+  <path d="M 40 45 Q 85 30 135 60 L 138 68 Q 85 38 38 52 Z" fill="#0ea5e9" opacity="0.9" />
+  <path d="M 38 54 Q 85 40 138 70 L 140 76 Q 85 46 36 60 Z" fill="#e10600" opacity="0.95" />
+
+  <!-- Visor Assembly -->
+  <path d="M 34 85 C 34 68, 55 60, 92 60 C 112 60, 128 66, 130 84 C 130 92, 110 96, 88 96 C 54 96, 34 94, 34 85 Z" fill="url(#visorGrad)" stroke="#090d16" stroke-width="2" />
+  <!-- Visor Upper Sheen -->
+  <path d="M 36 78 C 45 68, 70 62, 105 62 C 122 62, 126 70, 126 74 C 95 68, 60 70, 36 78 Z" fill="url(#visorSheen)" />
+
+  <!-- Visor Pivot Screw -->
+  <circle cx="124" cy="80" r="5" fill="#334155" stroke="#090d16" stroke-width="1.5" />
+  <circle cx="124" cy="80" r="2" fill="#e2e8f0" />
+
+  <!-- HANS Anchor Post -->
+  <circle cx="52" cy="106" r="4" fill="#64748b" stroke="#090d16" stroke-width="1.5" />
+
+  <!-- Aerodynamic Rear Spoiler -->
+  <path d="M 136 65 Q 152 70 148 88 L 144 86 Q 146 72 134 68 Z" fill="#0ea5e9" stroke="#090d16" stroke-width="1.2" />
+</svg>

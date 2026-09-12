@@ -1,0 +1,5 @@
+Model,Feature Set,Test RMSE (s),Test MAE (s),Train RMSE (s),Train MAE (s)
+Ridge Regression,"Baseline (grid, lap)",2.0461,1.7534,1.1394,0.6805
+Ridge Regression,"Enhanced (grid, lap, tire_age)",2.0686,1.7852,1.1392,0.6789
+Random Forest,"Baseline (grid, lap)",0.8043,0.6448,0.4165,0.2364
+Random Forest,"Enhanced (grid, lap, tire_age)",0.8319,0.6599,0.425,0.2455

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VROOM — Formula 1 Lap Time Predictor</title>
+  <meta name="description" content="Classical machine learning lap time prediction and telemetry analysis for the 2019 Austrian Grand Prix." />
+  
+  <!-- Favicon / Browser Tab Icon (VROOM Horizontal Artwork) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="assets/favicon.ico" />
+  
+  <!-- Design System & Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css?v=2.0" />
+  <link rel="stylesheet" href="css/animations.css?v=2.0" />
+  <link rel="stylesheet" href="css/liquid-glass.css" />
+</head>
+<body>
+
+  <!-- Atmospheric Sky Background & Horizon Lines -->
+  <div class="aero-sky-backdrop"></div>
+  <div class="aero-horizon-lines"></div>
+
+  <!-- Top Telemetry Strip (Deliberate Precision Bar) -->
+  <div class="telemetry-ticker-bar">
+    <div class="ticker-left-items">
+      <span class="status-dot active"></span>
+      <span class="ticker-item">HISTORICAL FIA TELEMETRY // 2019 AUSTRIAN GP</span>
+      <span class="ticker-sep">•</span>
+      <span class="ticker-item">RED BULL RING (SPIELBERG)</span>
+      <span class="ticker-sep">•</span>
+      <span class="ticker-item">RACE ID: 1018</span>
+      <span class="ticker-sep">•</span>
+      <span class="ticker-item">GREEN FLAG (0 RED FLAGS)</span>
+      <span class="ticker-sep">•</span>
+      <span class="ticker-item">ATMOSPHERE (OFFICIAL REPORT): DRY 31°C // TRACK 50°C</span>
+    </div>
+    <div class="ticker-right-item">
+      <span class="ticker-badge vroom-glass-badge">CLASSICAL ML // OPTION A</span>
+    </div>
+  </div>
+
+  <!-- Top Navigation (Unified VROOM Header) -->
+  <header class="nav-header vroom-glass vroom-glass-nav">
+    <div class="nav-left-group">
+      <a href="#home" class="brand-link-logo" data-nav="home" aria-label="VROOM Home">
+        <img src="assets/vroom-header-logo.png" alt="VROOM" class="header-logo-img" width="1143" height="467" />
+      </a>
+      <ul class="nav-links-row">
+        <li><button class="nav-link-btn active" data-nav="home">overview</button></li>
+        <li><button class="nav-link-btn" data-nav="predictor">predictor</button></li>
+        <li><button class="nav-link-btn" data-nav="racelab">race lab</button></li>
+        <li><button class="nav-link-btn" data-nav="methodology">methodology</button></li>
+      </ul>
+    </div>
+
+    <div class="nav-right-status">
+      <div class="header-status-indicator vroom-glass-pill">
+        <span class="status-dot"></span>
+        <span>SPIELBERG / DRY 31°C</span>
+      </div>
+      <button class="vroom-btn-nav" data-nav="predictor">
+        predictor →
+      </button>
+    </div>
+  </header>
+
+  <!-- Main View Area -->
+  <main class="main-wrapper">
+
+    <!-- ==================================================
+         VIEW 1: HOME (THE VROOM DESKTOP & TELEMETRY WORLD)
+    ================================================== -->
+    <section id="view-home" class="view-section active">
+
+      <!-- ==========================================
+           SCENE 1: THE ART-DIRECTED HERO CANVAS
+      ========================================== -->
+      <div class="home-hero-world">
+        
+        <!-- Left Column: Editorial Typography & Actions -->
+        <div class="hero-editorial-group">
+          <div class="hero-tag-line">
+            <span class="status-dot active"></span>
+            <span>FIA TELEMETRY ARCHIVE // RACE 1018</span>
+          </div>
+          <h1 class="hero-logo-heading">
+            <img src="assets/vroom-hero-logo.png" alt="VROOM" class="hero-logo-img" width="1140" height="465" />
+          </h1>
+          <p class="hero-strapline">an f1 lap time predictor rooted in classical machine learning.</p>
+          
+          <div class="hero-actions-row">
+            <button class="vroom-btn-primary" data-nav="predictor">
+              launch predictor →
+            </button>
+            <button class="vroom-btn-secondary" data-nav="racelab">
+              view race lab
+            </button>
+          </div>
+          
+          <div class="hero-grounded-meta">
+            2019 AUSTRIAN GRAND PRIX • RED BULL RING • 683 CLEAN LAPS • 0 SAFETY CARS
+          </div>
+
+          <!-- Physical Engineering Artifact -->
+          <div class="hero-tyre-obj" style="pointer-events: none;">
+            <img src="assets/hero-tire.png" alt="Star Artifact" class="hero-tyre-img" width="130" height="127" style="width: 130px; max-width: 100%; height: auto; display: block;" />
+          </div>
+        </div>
+
+        <!-- Right Column: Authoritative Circuit Telemetry Window -->
+        <div class="mac-window hero-circuit-win tilt-1 vroom-glass vroom-glass-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">circuit_spielberg_r09.dat</div>
+          </div>
+          <div class="mac-window-body" style="padding: 1.5rem; text-align: center; background: transparent;">
+            <img src="assets/track-map.svg" alt="Red Bull Ring Spielberg Circuit Map" style="width: 100%; max-width: 320px; height: auto; display: block; margin: 0 auto;" />
+          </div>
+          <div class="circuit-meta-grid">
+            <div class="circuit-meta-item"><span>CIRCUIT:</span> <b>SPIELBERG</b></div>
+            <div class="circuit-meta-item"><span>LENGTH:</span> <b>4.318 KM</b></div>
+            <div class="circuit-meta-item"><span>TURNS:</span> <b>10 CORNERS</b></div>
+            <div class="circuit-meta-item"><span>TRACK:</span> <b style="color: var(--accent-green);">50.2°C DRY</b></div>
+          </div>
+          <span class="mac-window-caption">spielberg_geometry.dat</span>
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           SCENE 2: THE LAP (EDITORIAL PAUSE & PHYSICAL FORCES)
+      ========================================== -->
+      <div class="lap-editorial-scene">
+        
+        <div class="lap-solitary-text">
+          <div class="editorial-num">01 // THE LAP</div>
+          <h2 class="editorial-headline">
+            what makes<br />a lap fast?
+          </h2>
+          <p class="editorial-subtitle">
+            Every lap time in Formula 1 is an ongoing negotiation between two opposing physical dynamics.
+          </p>
+        </div>
+
+        <div class="lap-forces-composition">
+          <!-- Feature 1: Macro Race Progression -->
+          <div class="force-artifact">
+            <div class="force-delta neutral">FEATURE 01</div>
+            <div class="force-title">macro race progression (lap)</div>
+            <div class="force-desc">
+              As laps advance from 1 to 71, cars shed onboard fuel weight while track grip evolves. In our classical ML models, lap number acts as the primary proxy for this macro progression across the race distance.
+            </div>
+            <div class="force-formula">feature: lap ∈ [1, 71]</div>
+          </div>
+
+          <!-- Centered Cockpit Artifact -->
+          <div class="wheel-artifact-wrap">
+            <img src="assets/cockpit.png" alt="F1 Cockpit Telemetry Artifact" class="cockpit-artifact-img" />
+          </div>
+
+          <!-- Feature 2: Stint Tire Progression -->
+          <div class="force-artifact">
+            <div class="force-delta neutral">FEATURE 02</div>
+            <div class="force-title">stint tire progression (tire_age)</div>
+            <div class="force-desc">
+              Tracks cumulative clean flying laps completed on a tire set since pit exit. Within a single final stint, tire age is mathematically collinear with race lap, offering no additional out-of-sample predictive power.
+            </div>
+            <div class="force-formula">feature: tire_age = lap - pit_lap</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           SCENE 3: DATA INTEGRITY (705 -> 683 LAPS)
+      ========================================== -->
+      <div class="audit-editorial-scene">
+        
+        <div class="audit-left-col">
+          <div class="editorial-num">02 // DATA INTEGRITY</div>
+          <h2 class="editorial-headline">
+            705 raw laps.<br />683 clean flies.
+          </h2>
+          <p class="editorial-subtitle">
+            We do not train models on pit stops or synthetic records. Formula 1 lap-time modeling demands strictly verified flying pace.
+          </p>
+          
+          <div class="audit-rules-cascade">
+            <div class="audit-rule-row">
+              <span class="rule-badge red">-11</span>
+              <div>
+                <div class="rule-name">Pit-Stop In-Laps Removed</div>
+                <div class="rule-detail">Entering the pit-lane enforces a 80 km/h speed limit, adding ~18s of artificial latency that skews flying pace telemetry.</div>
+              </div>
+            </div>
+            <div class="audit-rule-row">
+              <span class="rule-badge red">-11</span>
+              <div>
+                <div class="rule-name">Immediate Out-Laps Removed (P+1)</div>
+                <div class="rule-detail">The lap immediately following pit exit involves standing-box acceleration and cold tire warmup out of the pit apron.</div>
+              </div>
+            </div>
+            <div class="audit-rule-row">
+              <span class="rule-badge green">0</span>
+              <div>
+                <div class="rule-name">Pace Outliers > 1.5× Driver Median</div>
+                <div class="rule-detail">A dry race with zero safety cars and zero yellow-flag stoppages resulted in zero abnormal flying lap anomalies.</div>
+              </div>
+            </div>
+            <div class="audit-rule-row highlight">
+              <span class="rule-badge green">683</span>
+              <div>
+                <div class="rule-name">Clean Flying Laps Retained</div>
+                <div class="rule-detail">Retained across all 10 classified finishers with zero fabricated or imputed records.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="audit-right-col">
+          <!-- Dark Terminal Window -->
+          <div class="mac-window audit-terminal-win tilt-neg-1 vroom-glass vroom-glass-window vroom-glass-window-dark">
+            <div class="mac-window-header" style="background: rgba(15, 23, 42, 0.45); border-color: #1e293b;">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <div class="mac-window-title" style="color: #cbd5e1; font-weight: 600;">audit_cascade_verification.log</div>
+            </div>
+            <div class="mac-window-body" style="background: transparent; color: #f8fafc; font-family: var(--font-mono); font-size: 0.74rem; padding: 1.25rem; line-height: 1.65;">
+              <div style="color: #cbd5e1;">$ vroom audit --race 1018 --cohort classified</div>
+              <div style="color: #38bdf8; margin-top: 6px;">[AUDIT] SOURCING KAGGLE F1 (1950-2024)</div>
+              <div>[INFO] Race: 2019 Austrian GP (Spielberg)</div>
+              <div>[INFO] Classified Finishers: 10 drivers</div>
+              <div>[INFO] Raw Timing Rows: 705 laps</div>
+              <div style="color: #f87171; margin-top: 6px;">[RULE 1] Pit In-Laps Filter: -11 laps</div>
+              <div style="color: #f87171;">[RULE 2] Pit Out-Laps Filter: -11 laps</div>
+              <div style="color: #4ade80;">[RULE 3] Flying Median &gt; 1.5x: 0 laps</div>
+              <div style="color: #38bdf8; border-top: 1px dashed #334155; margin-top: 8px; padding-top: 6px;">
+                [RESULT] Clean Flying Laps: 683 (100% verified)
+              </div>
+            </div>
+            <span class="mac-window-caption">audit_cascade.log</span>
+          </div>
+
+          <!-- Physical Editorial Artifact -->
+          <div class="helmet-artifact-wrap" style="pointer-events: none;">
+            <img src="assets/driver-artifact.png" alt="Driver Artifact" class="driver-artifact-img" width="145" height="176" style="width: 145px; max-width: 100%; height: auto; display: block; margin: 0 auto;" />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           SCENE 4: CHRONOLOGICAL STINT SPLIT
+      ========================================== -->
+      <div class="split-editorial-scene">
+        
+        <div class="split-header-wrap">
+          <div class="editorial-num">03 // METHODOLOGY</div>
+          <h2 class="editorial-headline">
+            never train<br />on random laps.
+          </h2>
+          <p class="editorial-subtitle">
+            Random splitting causes temporal data leakage between adjacent laps. We enforce a strict chronological stint boundary.
+          </p>
+        </div>
+
+        <div class="split-cards-row">
+          <div class="mac-window split-win vroom-glass vroom-glass-window">
+            <div class="mac-window-header">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <div class="mac-window-title">train_partition.dat</div>
+            </div>
+            <div class="mac-window-body" style="padding: 1.75rem; font-family: var(--font-mono); background: transparent;">
+              <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">TRAINING PARTITION</div>
+              <div style="font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--text-primary); margin: 0.35rem 0;">280 laps</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55;">
+                Earlier stints across all 10 classified drivers (41.0% of clean data). Establishes baseline regression parameters across starting grid slot and race lap progression.
+              </div>
+            </div>
+            <span class="mac-window-caption">stint_1_cohort.dat</span>
+          </div>
+
+          <div class="mac-window split-win highlight vroom-glass vroom-glass-window">
+            <div class="mac-window-header" style="background: rgba(240, 253, 244, 0.45);">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <div class="mac-window-title" style="color: #166534; font-weight: 700;">test_partition.dat (UNSEEN)</div>
+            </div>
+            <div class="mac-window-body" style="padding: 1.75rem; font-family: var(--font-mono); background: transparent;">
+              <div style="font-size: 0.72rem; color: #166534; text-transform: uppercase; letter-spacing: 0.05em;">OUT-OF-STINT TEST</div>
+              <div style="font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: #166534; margin: 0.35rem 0;">403 laps</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55;">
+                Final stint across all 10 drivers (59.0% of clean data). Evaluates true forward extrapolation with zero lookahead bias.
+              </div>
+            </div>
+            <span class="mac-window-caption">final_stint_evaluation.dat</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ==========================================
+           SCENE 5: VERSTAPPEN MEDIA BROADCAST WINDOW
+      ========================================== -->
+      <div class="media-broadcast-scene">
+        
+        <div class="broadcast-editorial-header">
+          <div class="editorial-num">04 // FINAL STINT EVALUATION</div>
+          <h2 class="editorial-headline">
+            max verstappen — final stint pace
+          </h2>
+          <p class="editorial-subtitle">
+            Evaluating model predictions against recorded test telemetry across 39 clean flying laps (Laps 33 to 71) during Verstappen's race victory.
+          </p>
+        </div>
+
+        <div class="broadcast-window-stage">
+          <div class="mac-window broadcast-media-window vroom-glass vroom-glass-window">
+            <div class="mac-window-header">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <div class="mac-window-title">verstappen_stint_prediction.png (300 DPI Matplotlib)</div>
+              <div style="margin-left: auto; font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-green); font-weight: 700;">
+                ● HISTORICAL STINT ARCHIVE
+              </div>
+            </div>
+            
+            <div class="mac-window-body" style="background: transparent; padding: 1.25rem; text-align: center;">
+              <img src="assets/stint_prediction_verstappen.png" alt="Max Verstappen Final Stint Prediction Plot" style="width: 100%; height: auto; display: block; border-radius: 4px;" />
+            </div>
+
+            <div class="broadcast-media-footer">
+              <div class="broadcast-stat-item">
+                <span class="stat-label">DRIVER</span>
+                <span class="stat-value">Max Verstappen (#33 RB15)</span>
+              </div>
+              <div class="broadcast-stat-item">
+                <span class="stat-label">TEST WINDOW</span>
+                <span class="stat-value">39 Flying Laps (33 – 71)</span>
+              </div>
+              <div class="broadcast-stat-item">
+                <span class="stat-label">RANDOM FOREST ENHANCED</span>
+                <span class="stat-value highlight-cyan">0.800s MAE</span>
+              </div>
+              <div class="broadcast-stat-item">
+                <span class="stat-label">TIRE COMPOUND (REPORT)</span>
+                <span class="stat-value">Pirelli Hard (FIA Report)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Retro Yoshi Kart Floating Artifact -->
+          <div class="yoshi-artifact-obj">
+            <img src="assets/retroyoshi.jpg" alt="Retro Yoshi Kart Artifact" class="yoshi-artifact-img" />
+          </div>
+        </div>
+        <span class="mac-window-caption">fig_01_rb15_stint_evaluation.png</span>
+
+      </div>
+
+      <!-- ==========================================
+           SCENE 6: MODEL BENCHMARK (SKY ATMOSPHERE)
+      ========================================== -->
+      <div class="sky-atmospheric-section">
+        <!-- Floating Mario Kart Retro Artifact (Left) -->
+        <div class="mario-artifact-obj" aria-hidden="true">
+          <img src="assets/retromario.jpeg" alt="" class="mario-artifact-img" />
+        </div>
+
+        <!-- Realistic atmospheric clouds with gentle parallax drift -->
+        <div class="sky-clouds-viewport" aria-hidden="true">
+          <img src="assets/realistic-cloud-1.svg" alt="" class="sky-cloud sky-cloud-drift-1" />
+          <img src="assets/realistic-cloud-2.svg" alt="" class="sky-cloud sky-cloud-drift-2" />
+          <img src="assets/realistic-cloud-3.svg" alt="" class="sky-cloud sky-cloud-drift-3" />
+          <img src="assets/realistic-cloud-2.svg" alt="" class="sky-cloud sky-cloud-drift-4" />
+        </div>
+
+        <div class="sky-section-header">
+          <span class="sky-pill-tag">05 // MODEL BENCHMARK</span>
+          <h2 class="sky-title">classical algorithms, verified</h2>
+          <p class="sky-subtitle">Evaluated strictly on 403 unseen test laps with zero temporal leakage.</p>
+        </div>
+
+        <div class="sky-benchmark-cards">
+          <!-- Ridge Regression -->
+          <div class="sky-model-card sky-glass-window vroom-glass">
+            <div class="sky-card-header">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <span class="sky-badge">L2 REGULARIZED LINEAR</span>
+            </div>
+            <div class="sky-card-body">
+              <h4 class="sky-card-name">Ridge Regression</h4>
+              <div class="sky-card-sub">StandardScaler + Grid + Race Lap</div>
+              <div class="sky-card-metric">2.0461s</div>
+              <div class="sky-card-metric-label">TEST RMSE (MAE 1.7534s)</div>
+              <p class="sky-card-notes">
+                Smooth linear plane capturing macro race lap pace progression.
+              </p>
+            </div>
+          </div>
+
+          <!-- Random Forest Regressor -->
+          <div class="sky-model-card sky-glass-window vroom-glass">
+            <div class="sky-card-header">
+              <div class="mac-traffic-lights">
+                <span class="mac-tl red"></span>
+                <span class="mac-tl yellow"></span>
+                <span class="mac-tl green"></span>
+              </div>
+              <span class="sky-badge best">BEST TEST PACE</span>
+            </div>
+            <div class="sky-card-body">
+              <h4 class="sky-card-name">Random Forest</h4>
+              <div class="sky-card-sub">100 Trees • Max Depth 6 • Grid + Lap</div>
+              <div class="sky-card-metric accent-blue">0.8043s</div>
+              <div class="sky-card-metric-label">TEST RMSE (MAE 0.6448s)</div>
+              <p class="sky-card-notes">
+                Non-linear decision ensemble outperforming linear regression by ~1.24s RMSE.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Collinearity Finding Window -->
+        <div class="sky-terminal-window sky-glass-window vroom-glass vroom-glass-window-dark">
+          <div class="terminal-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #cbd5e1; font-weight: 600; margin-left: 8px;">
+              findings_tire_age_collinearity.log
+            </span>
+          </div>
+          <div class="terminal-body">
+            <div>&gt; <b>SCIENTIFIC FINDING: TIRE AGE IN SINGLE-STINT TESTS</b></div>
+            <div style="margin-top: 6px;">
+              &gt; In this non-random single-stint split, <code>tire_age</code> did not improve out-of-stint extrapolation (Enhanced RF RMSE 0.8319s vs Baseline 0.8043s).
+            </div>
+            <div style="margin-top: 6px;">
+              &gt; <b>WHY?</b> In a single final stint, tire age is strictly collinear with race lap: <code>tire_age = race_lap - stint_start_lap</code>. The baseline models on <code>grid + lap</code> already capture race progression; adding collinear tire age produced a slight test penalty.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SCENE 7: TRANSITION & WORKSTATION CTA
+      ========================================== -->
+      <div class="transition-cta-section">
+        <div class="editorial-num">06 // WORKSTATION</div>
+        <h2 class="editorial-headline">ready to predict?</h2>
+        <p class="editorial-subtitle">
+          Explore custom lap time predictions or examine the full 10-driver classification cohort.
+        </p>
+        <div class="pill-button-pair">
+          <button class="vroom-btn-primary" data-nav="predictor">
+            launch predictor workstation →
+          </button>
+          <button class="vroom-btn-secondary" data-nav="racelab">
+            explore race lab data
+          </button>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           SCENE 8: CLEAN FAQ ACCORDION
+      ========================================== -->
+      <div class="faq-section">
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+          <span class="sky-pill-tag" style="background: #f1f5f9; color: #334155;">QUESTIONS</span>
+          <h2 style="font-family: var(--font-display); font-size: 2.2rem; letter-spacing: -0.03em;">frequently asked questions</h2>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>which formula 1 race was selected?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            The 2019 Austrian Grand Prix (Race ID 1018) held at the Red Bull Ring in Spielberg. External historical FIA race bulletins document dry running (31°C ambient, 50°C track) with 0 red flags and zero safety cars (contextual verification; not part of Kaggle lap_times.csv).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>how was the data cleaned before training?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            We applied a strict sequential 3-rule cascade: (1) removed 11 pit-stop in-laps, (2) removed 11 immediate out-laps (P+1), and (3) checked for slow outlier laps (&gt; 1.5× driver median), removing 0. Starting with 705 raw laps, exactly 683 clean flying laps were retained.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>why did you use a stint-based split instead of random?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Random splitting causes temporal data leakage because consecutive laps share track and tire states. By training on earlier stints (280 laps) and testing strictly on each driver's final stint (403 laps), we measure true forward pace prediction.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>why classical machine learning instead of neural networks?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Option A explicitly mandates classical machine learning. Ridge Regression and Random Forest Regressors offer full mathematical transparency, exact reproducible coefficients, and high performance on structured tabular race telemetry.
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================================================
+         VIEW 2: PREDICTOR (TELEMETRY WORKSTATION)
+    ================================================== -->
+    <section id="view-predictor" class="view-section">
+      <div class="page-editorial-header">
+        <div class="editorial-num">01 // LOCAL INFERENCE WORKSTATION</div>
+        <h1 class="editorial-headline">lap predictor</h1>
+        <p class="editorial-subtitle">
+          Interactive local browser inference engine evaluated against recorded historical telemetry from the 2019 Austrian Grand Prix.
+        </p>
+      </div>
+
+      <div class="predictor-workstation-grid">
+        <!-- Left: Input Control Console (macOS Window) -->
+        <div class="mac-window workstation-frame vroom-glass vroom-glass-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">parameters_console.dat</div>
+          </div>
+          
+          <div class="workstation-form-body">
+            <!-- Driver Selection -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label" for="pred-driver">
+                <span>TARGET DRIVER</span>
+                <span class="vroom-label-meta">10 CLASSIFIED FINISHERS</span>
+              </label>
+              <select id="pred-driver" class="vroom-select vroom-glass-control"></select>
+            </div>
+
+            <!-- Starting Grid -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label" for="pred-grid">
+                <span>QUALIFYING GRID POSITION</span>
+                <span id="pred-grid-val" class="vroom-val-badge vroom-glass-badge">P2</span>
+              </label>
+              <div class="vroom-slider-wrap vroom-glass-control">
+                <input type="range" id="pred-grid" class="vroom-slider" min="1" max="20" value="2" />
+              </div>
+            </div>
+
+            <!-- Race Lap -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label" for="pred-lap">
+                <span>RACE LAP PROGRESSION</span>
+                <span id="pred-lap-val" class="vroom-val-badge vroom-glass-badge">L33</span>
+              </label>
+              <div class="vroom-slider-wrap vroom-glass-control">
+                <input type="range" id="pred-lap" class="vroom-slider" min="1" max="71" value="33" />
+              </div>
+            </div>
+
+            <!-- Tire Age -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label" for="pred-tire-age">
+                <span>TIRE AGE (0–48 OBSERVED LAPS)</span>
+                <span id="pred-tire-age-val" class="vroom-val-badge vroom-glass-badge">0 laps</span>
+              </label>
+              <div class="vroom-slider-wrap vroom-glass-control">
+                <input type="range" id="pred-tire-age" class="vroom-slider" min="0" max="48" value="0" />
+              </div>
+            </div>
+
+            <!-- Algorithm Selection -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label" for="pred-model">
+                <span>REGRESSION ALGORITHM</span>
+                <span class="vroom-label-meta">CLASSICAL ML</span>
+              </label>
+              <select id="pred-model" class="vroom-select vroom-glass-control">
+                <option value="rf">Random Forest Regressor (Ensemble Trees • Depth 6)</option>
+                <option value="ridge">Ridge Regression (StandardScaler + L2 Regularization)</option>
+              </select>
+            </div>
+
+            <!-- Feature Set Toggle -->
+            <div class="vroom-form-group">
+              <label class="vroom-form-label">
+                <span>FEATURE SPACE CONFIGURATION</span>
+              </label>
+              <div class="vroom-radio-options vroom-glass-control">
+                <label class="vroom-radio-label">
+                  <input type="radio" name="feature-set" value="enhanced" checked />
+                  <span>Enhanced (Grid + Lap + Tire Age)</span>
+                </label>
+                <label class="vroom-radio-label">
+                  <input type="radio" name="feature-set" value="baseline" />
+                  <span>Baseline (Grid + Lap)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <span class="mac-window-caption">controller_inputs_v1.0.dat</span>
+        </div>
+
+        <!-- Right: Telemetry Timing Monitor (macOS Window) -->
+        <div class="mac-window workstation-frame tilt-1 vroom-glass vroom-glass-window vroom-glass-window-dark">
+          <div class="mac-window-header" style="background: rgba(15, 23, 42, 0.45); border-color: #1e293b;">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title" style="color: #cbd5e1; font-weight: 600;">lap_timing_telemetry_monitor.dat</div>
+          </div>
+
+          <div class="timing-monitor-box">
+            <div>
+              <div class="timing-header-tag">
+                <span class="status-dot active"></span>
+                <span>PREDICTED FLYING LAP TIME</span>
+              </div>
+
+              <div id="pred-display-time" class="timing-big-time">1:08.783</div>
+              <div id="pred-display-seconds" class="timing-seconds-sub">Elapsed Flying Time: 68.783s</div>
+
+              <div class="timing-meta-grid">
+                <div class="timing-meta-item">
+                  <span class="timing-meta-label">TARGET DRIVER</span>
+                  <span id="pred-meta-driver" class="timing-meta-val">Max Verstappen (VER)</span>
+                </div>
+                <div class="timing-meta-item">
+                  <span class="timing-meta-label">POSITION &amp; LAP</span>
+                  <span id="pred-meta-grid-lap" class="timing-meta-val">Grid P2 • Race Lap 33</span>
+                </div>
+                <div class="timing-meta-item">
+                  <span class="timing-meta-label">TIRE AGE FEATURE</span>
+                  <span id="pred-meta-tire-age" class="timing-meta-val">0 Laps Old</span>
+                </div>
+                <div class="timing-meta-item">
+                  <span class="timing-meta-label">SELECTED MODEL</span>
+                  <span id="pred-meta-model" class="timing-meta-val">Random Forest (ENHANCED)</span>
+                </div>
+              </div>
+
+              <!-- Actual Telemetry Comparison Box -->
+              <div id="pred-actual-card" class="timing-actual-card">
+                <div class="timing-actual-flex">
+                  <div>
+                    <div class="timing-actual-title">RECORDED TEST STINT TELEMETRY</div>
+                    <div id="pred-actual-time" class="timing-actual-time">1:08.783</div>
+                  </div>
+                  <div id="pred-delta-badge" class="delta-badge delta-good">Δ 0.000s</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="pred-model-notes" class="timing-note">
+              Local Inference: Recorded test-stint Random Forest evaluation record.
+            </div>
+          </div>
+          <span class="mac-window-caption">lap_timing_monitor.dat</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         VIEW 3: RACE LAB & TELEMETRY ARCHIVE
+    ================================================== -->
+    <section id="view-racelab" class="view-section">
+      <div class="page-editorial-header">
+        <div class="editorial-num">02 // TELEMETRY ARCHIVE</div>
+        <h1 class="editorial-headline">race lab</h1>
+        <p class="editorial-subtitle">
+          2019 Austrian Grand Prix (Race ID 1018) Experimental Findings &amp; Recorded Stint Data.
+        </p>
+      </div>
+
+      <div class="racelab-page-layout">
+        <!-- Overview Stat Strip -->
+        <div class="archive-stat-strip">
+          <div class="archive-stat-item">
+            <div class="archive-stat-label">RACE DISTANCE</div>
+            <div class="archive-stat-val">71 Laps</div>
+            <div class="archive-stat-sub">Red Bull Ring (4.318 km)</div>
+          </div>
+          <div class="archive-stat-item">
+            <div class="archive-stat-label">CLEAN FLYING LAPS</div>
+            <div class="archive-stat-val">683</div>
+            <div class="archive-stat-sub">10 Drivers • 22 Removed</div>
+          </div>
+          <div class="archive-stat-item">
+            <div class="archive-stat-label">TRAINING STINTS</div>
+            <div class="archive-stat-val">280 Laps</div>
+            <div class="archive-stat-sub">41.0% of Clean Laps</div>
+          </div>
+          <div class="archive-stat-item">
+            <div class="archive-stat-label">TESTING STINTS</div>
+            <div class="archive-stat-val">403 Laps</div>
+            <div class="archive-stat-sub">59.0% Unseen Extrapolation</div>
+          </div>
+        </div>
+
+        <!-- Cleaning Cascade Window -->
+        <div class="mac-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">data_cleaning_audit_cascade.dat</div>
+          </div>
+          <div id="cleaning-waterfall-container" class="waterfall-pipeline">
+            <!-- Injected via JavaScript -->
+          </div>
+          <span class="mac-window-caption">cleaning_pipeline_cascade.dat</span>
+        </div>
+
+        <!-- Interactive Stint Replay Visualizer Window -->
+        <div class="mac-window chart-viewport-card vroom-glass vroom-glass-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">verstappen_stint_replay.svg (Laps 33-71)</div>
+            <div style="margin-left: auto; font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-cyan); font-weight: 700;">
+              INTERACTIVE REPLAY
+            </div>
+          </div>
+
+          <div class="chart-controls-bar">
+            <div class="chart-legend-toggles">
+              <span class="toggle-chip actual" data-series="actual">● Actual Lap Time</span>
+              <span class="toggle-chip rf-enh" data-series="rf_enhanced">━ RF Enhanced (Grid, Lap, Tire Age)</span>
+              <span class="toggle-chip rf-base" data-series="rf_baseline">┅ RF Baseline (Grid, Lap)</span>
+              <span class="toggle-chip ridge-enh" data-series="ridge_enhanced">⋯ Ridge Enhanced</span>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">
+              HOVER POINTS FOR RECORDED LAP READOUT
+            </div>
+          </div>
+
+          <!-- SVG Chart Container -->
+          <div id="stint-chart-container" class="chart-svg-container">
+            <div id="stint-chart-tooltip" class="chart-tooltip"></div>
+          </div>
+
+          <div style="padding: 12px 1.5rem; background: #f8fafc; border-top: 1px solid #f1f5f9; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analysis:</strong> Across Verstappen's 39-lap final stint, the Enhanced Random Forest model achieves an MAE of 0.800s and closely tracks the pace curve.
+          </div>
+          <span class="mac-window-caption">verstappen_final_stint_replay.svg</span>
+        </div>
+
+        <!-- Model Benchmark Matrix Window -->
+        <div class="mac-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">model_performance_benchmarks.dat</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="telemetry-table">
+              <thead>
+                <tr>
+                  <th>Model Algorithm</th>
+                  <th>Feature Space</th>
+                  <th>Test RMSE (s)</th>
+                  <th>Test MAE (s)</th>
+                  <th>Train RMSE (s)</th>
+                  <th>Train MAE (s)</th>
+                </tr>
+              </thead>
+              <tbody id="metrics-table-body">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="telemetry-insight-box" style="margin: 1.5rem;">
+            <div class="telemetry-insight-title">SCIENTIFIC FINDING: TIRE AGE COLLINEARITY</div>
+            <div class="telemetry-insight-desc">
+              In this non-random stint-based split, <code>tire_age</code> did not provide additional predictive benefit over grid position and lap number (Ridge RMSE: 2.0461s → 2.0686s; RF RMSE: 0.8043s → 0.8319s). Within a single final stint, tire age has near-perfect collinearity with lap number (<math>tire_age = lap - constant</math>), providing redundant information. The Random Forest baseline on grid and lap already captures macro race progression dynamics.
+            </div>
+          </div>
+          <span class="mac-window-caption">metrics_summary.dat</span>
+        </div>
+
+        <!-- Driver Cohort Table Window -->
+        <div class="mac-window">
+          <div class="mac-window-header">
+            <div class="mac-traffic-lights">
+              <span class="mac-tl red"></span>
+              <span class="mac-tl yellow"></span>
+              <span class="mac-tl green"></span>
+            </div>
+            <div class="mac-window-title">driver_cohort_partition.dat (10 Classified Finishers)</div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="telemetry-table">
+              <thead>
+                <tr>
+                  <th>Driver (Code)</th>
+                  <th>Grid Slot</th>
+                  <th>Classification</th>
+                  <th>Total Laps</th>
+                  <th>Pit In-Laps</th>
+                  <th>Train Laps</th>
+                  <th>Test Laps</th>
+                  <th>Clean Laps</th>
+                </tr>
+              </thead>
+              <tbody id="drivers-table-body">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+          <span class="mac-window-caption">classified_finishers_partition.dat</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         VIEW 4: METHODOLOGY (ENGINEERING BLUEPRINT)
+    ================================================== -->
+    <section id="view-methodology" class="view-section">
+      <div class="methodology-page-layout">
+        <div class="page-editorial-header">
+          <div class="editorial-num">03 // SYSTEM ARCHITECTURE</div>
+          <h1 class="editorial-headline">technical methodology</h1>
+          <p class="editorial-subtitle">
+            Systematic pipeline design, boundary conventions, and classical modeling constraints.
+          </p>
+        </div>
+
+        <div class="blueprint-container">
+          <!-- 01 Data Source -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">01</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">data source &amp; integrity</h3>
+                <span class="blueprint-tag">KAGGLE F1 (1950–2024)</span>
+              </div>
+              <p class="blueprint-body">
+                Standardized timing records from <code>lap_times.csv</code>, <code>pit_stops.csv</code>, <code>results.csv</code>, and <code>races.csv</code> by Rohan Rao were utilized. Source files are strictly preserved without synthetic augmentation or modification.
+              </p>
+            </div>
+          </div>
+
+          <!-- 02 Race Selection -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">02</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">race selection rationale</h3>
+                <span class="blueprint-tag">SPIELBERG // RACE ID 1018</span>
+              </div>
+              <p class="blueprint-body">
+                Selected for its unbroken green-flag running: the 2019 Austrian Grand Prix at the Red Bull Ring. All 20 selected-race drivers were classified in the official results; 5 completed the full 71-lap distance and 15 finished one lap behind.
+              </p>
+              <div class="blueprint-annotation">
+                Externally Verified Race Conditions (Official FIA Bulletins): Dry 31°C ambient, 50.2°C track, 0% precipitation, 0 safety cars, 0 red flags (historical context; not in Kaggle lap_times.csv).
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 Cleaning Cascade -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">03</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">sequential 3-rule cleaning cascade</h3>
+                <span class="blueprint-tag">705 RAW → 683 CLEAN</span>
+              </div>
+              <p class="blueprint-body">
+                Non-flying laps are eliminated in strict sequential order:
+                <br />• <strong>Rule 1:</strong> Pit-stop in-laps removed (11 laps).
+                <br />• <strong>Rule 2:</strong> Immediate out-laps (P+1) removed (11 laps).
+                <br />• <strong>Rule 3:</strong> Outlier laps &gt; 1.5× driver median removed (0 laps).
+                <br />Exactly 683 clean flying laps retained across all 10 classified finishers.
+              </p>
+            </div>
+          </div>
+
+          <!-- 04 Feature Space Architecture -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">04</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">feature space engineering</h3>
+                <span class="blueprint-tag">BASELINE VS ENHANCED</span>
+              </div>
+              <p class="blueprint-body">
+                • <strong>Baseline:</strong> <code>grid</code> (qualifying starting slot) + <code>lap</code> (macro race progression).
+                <br />• <strong>Enhanced:</strong> <code>grid</code> + <code>lap</code> + <code>tire_age</code>.
+                <br />• <strong>Tire Age Convention:</strong> Resets to 0 at the first retained flying lap of each stint (Lap 1 for Stint 1; Lap P+2 after pit stop), incrementing by 1 on each subsequent lap.
+              </p>
+            </div>
+          </div>
+
+          <!-- 05 Stint Split Partition -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">05</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">chronological stint partition</h3>
+                <span class="blueprint-tag">ZERO TEMPORAL LEAKAGE</span>
+              </div>
+              <p class="blueprint-body">
+                Chronological stint partition testing true out-of-stint extrapolation:
+                <br />• <strong>Training:</strong> Earlier stints across 10 drivers (280 laps, 41.0%).
+                <br />• <strong>Testing:</strong> Final stint across all 10 drivers (403 laps, 59.0%).
+                <br />Strict zero data leakage between training and testing partitions.
+              </p>
+            </div>
+          </div>
+
+          <!-- 06 Classical Models -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">06</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">classical regression algorithms</h3>
+                <span class="blueprint-tag">NO NEURAL BLACK BOXES</span>
+              </div>
+              <p class="blueprint-body">
+                • <strong>Ridge Regression:</strong> L2 regularized linear model inside a <code>StandardScaler</code> pipeline (α=1.0).
+                <br />• <strong>Random Forest Regressor:</strong> Non-linear decision tree ensemble (100 estimators, max depth 6). Pinned to <code>RANDOM_STATE = 42</code>.
+              </p>
+            </div>
+          </div>
+
+          <!-- 07 Evaluation Metrics -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">07</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">evaluation &amp; benchmarks</h3>
+                <span class="blueprint-tag">RMSE &amp; MAE IN SECONDS</span>
+              </div>
+              <p class="blueprint-body">
+                Evaluated strictly on the unseen final stint test set:
+                <br />• Random Forest Baseline: <strong>RMSE 0.8043s | MAE 0.6448s</strong>.
+                <br />• Ridge Regression Baseline: <strong>RMSE 2.0461s | MAE 1.7534s</strong>.
+                <br />Non-linear tree ensemble outperformed linear regression by ~1.24s RMSE.
+              </p>
+            </div>
+          </div>
+
+          <!-- 08 Collinearity Finding -->
+          <div class="blueprint-row">
+            <div class="blueprint-num-col">08</div>
+            <div class="blueprint-main-col">
+              <div class="blueprint-header">
+                <h3 class="blueprint-title">collinearity &amp; stint dynamics</h3>
+                <span class="blueprint-tag">SCIENTIFIC CONCLUSION</span>
+              </div>
+              <p class="blueprint-body">
+                Adding <code>tire_age</code> slightly worsened test RMSE (+0.023s Ridge; +0.028s RF). Because the test set is strictly the final stint, tire age linearly tracks race lap progression (<code>tire_age = lap - constant</code>). The baseline models already capture macro pace progression through grid slot and lap number.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Red Bull Ring Checkered Curb Accent -->
+  <div class="curb-accent-bar"></div>
+
+  <!-- Site Footer (Reference-Driven Layout with Folder Wordmark) -->
+  <footer class="site-footer">
+    <div class="footer-inner-grid">
+      <div class="footer-col">
+        <h6>product</h6>
+        <ul>
+          <li><a href="#home" data-nav="home">overview</a></li>
+          <li><a href="#predictor" data-nav="predictor">predictor workstation</a></li>
+          <li><a href="#racelab" data-nav="racelab">race lab</a></li>
+          <li><a href="#methodology" data-nav="methodology">methodology</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h6>telemetry</h6>
+        <ul>
+          <li><a href="#racelab" data-nav="racelab">2019 austrian gp</a></li>
+          <li><a href="#racelab" data-nav="racelab">verstappen stint 2</a></li>
+          <li><a href="#racelab" data-nav="racelab">red bull ring (spielberg)</a></li>
+          <li><a href="#racelab" data-nav="racelab">683 clean laps</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h6>models</h6>
+        <ul>
+          <li><a href="#racelab" data-nav="racelab">ridge baseline (2.0461s)</a></li>
+          <li><a href="#racelab" data-nav="racelab">random forest (0.8043s)</a></li>
+          <li><a href="#methodology" data-nav="methodology">stint-based split</a></li>
+          <li><a href="#methodology" data-nav="methodology">tire_age collinearity</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h6>disclaimer</h6>
+        <p style="font-size: 0.74rem; color: var(--text-muted); line-height: 1.5;">
+          *VROOM models are classical regression algorithms evaluated strictly on the 2019 Austrian Grand Prix. Zero deep learning or neural black boxes.*
+        </p>
+      </div>
+    </div>
+
+    <!-- Confident Architectural Footer Signature -->
+    <div class="footer-brand-signature">
+      vroom // telemetry archive
+    </div>
+
+    <div class="footer-copy">
+      © Project VROOM 2026. Classical Machine Learning Lap Time Prediction.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/predictor.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/liquid-glass.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

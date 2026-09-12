@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="trackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <filter id="trackGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background telemetry grid lines -->
+  <g stroke="rgba(2, 132, 199, 0.08)" stroke-width="1">
+    <line x1="50" y1="20" x2="50" y2="300" />
+    <line x1="150" y1="20" x2="150" y2="300" />
+    <line x1="250" y1="20" x2="250" y2="300" />
+    <line x1="350" y1="20" x2="350" y2="300" />
+    <line x1="450" y1="20" x2="450" y2="300" />
+    <line x1="20" y1="60" x2="480" y2="60" />
+    <line x1="20" y1="140" x2="480" y2="140" />
+    <line x1="20" y1="220" x2="480" y2="220" />
+  </g>
+
+  <!-- Track Glow Foundation -->
+  <path d="M 80 250 
+           L 380 250 
+           Q 440 250 450 200 
+           L 460 120 
+           Q 460 70 410 70 
+           L 240 70 
+           Q 210 70 200 100 
+           L 180 140 
+           Q 160 180 120 180 
+           L 80 180 
+           Q 40 180 50 220 
+           Z" 
+        fill="none" 
+        stroke="#38bdf8" 
+        stroke-width="14" 
+        stroke-opacity="0.25" 
+        stroke-linejoin="round"
+        stroke-linecap="round" />
+
+  <!-- Main Asphalt Track Surface -->
+  <path id="circuitPath"
+        d="M 80 250 
+           L 380 250 
+           Q 440 250 450 200 
+           L 460 120 
+           Q 460 70 410 70 
+           L 240 70 
+           Q 210 70 200 100 
+           L 180 140 
+           Q 160 180 120 180 
+           L 80 180 
+           Q 40 180 50 220 
+           Z" 
+        fill="none" 
+        stroke="url(#trackGrad)" 
+        stroke-width="6" 
+        stroke-linejoin="round"
+        stroke-linecap="round" />
+
+  <!-- Start / Finish Line (Checkered accent) -->
+  <line x1="140" y1="244" x2="140" y2="256" stroke="#ffffff" stroke-width="4" />
+  <line x1="144" y1="244" x2="144" y2="256" stroke="#ef4444" stroke-width="4" />
+
+  <!-- Turn Annotations -->
+  <!-- T1: Niki Lauda Kurve -->
+  <circle cx="430" cy="245" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+  <text x="440" y="260" font-family="'SF Mono', monospace" font-size="10" font-weight="700" fill="#0369a1">T1</text>
+
+  <!-- T3: Remus (Top hairpin) -->
+  <circle cx="445" cy="75" r="5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5" />
+  <text x="455" y="70" font-family="'SF Mono', monospace" font-size="10" font-weight="700" fill="#ef4444">T3 (Remus)</text>
+
+  <!-- T4: Schlossgold -->
+  <circle cx="230" cy="75" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />
+  <text x="215" y="60" font-family="'SF Mono', monospace" font-size="10" font-weight="700" fill="#0369a1">T4</text>
+
+  <!-- T9/T10: Jochen Rindt Kurve -->
+  <circle cx="55" cy="235" r="5" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
+  <text x="30" y="270" font-family="'SF Mono', monospace" font-size="10" font-weight="700" fill="#10b981">T10 (Finish)</text>
+
+  <!-- Center Badge -->
+  <g transform="translate(180, 190)">
+    <rect x="0" y="0" width="160" height="42" rx="6" fill="#ffffff" fill-opacity="0.9" stroke="rgba(2,132,199,0.3)" stroke-width="1"/>
+    <text x="12" y="18" font-family="-apple-system, sans-serif" font-size="11" font-weight="800" fill="#0f172a">RED BULL RING</text>
+    <text x="12" y="32" font-family="'SF Mono', monospace" font-size="9" fill="#0284c7" font-weight="600">4.318 KM • 71 LAPS</text>
+  </g>
+</svg>

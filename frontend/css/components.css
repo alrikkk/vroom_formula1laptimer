@@ -1,0 +1,1021 @@
+/**
+ * VROOM Components: Reference-Driven System (Workstation, Archive, Blueprint & macOS Windows)
+ */
+
+/* ==================================================
+   1. AUTHENTIC MACOS DESKTOP WINDOWS
+================================================== */
+.mac-window {
+  background: var(--canvas-surface);
+  border: var(--border-window);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--trans-smooth), box-shadow var(--trans-smooth);
+}
+
+.mac-window:hover {
+  box-shadow: var(--shadow-window-hover);
+}
+
+.mac-window-header {
+  background: #f8fafc;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  user-select: none;
+}
+
+.mac-traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.mac-tl {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.mac-tl.red { background: var(--mac-red); border: 1px solid #e0443e; }
+.mac-tl.yellow { background: var(--mac-yellow); border: 1px solid #dea123; }
+.mac-tl.green { background: var(--mac-green); border: 1px solid #1aab29; }
+
+.mac-window-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #334155;
+  pointer-events: none;
+}
+
+.terminal-header .mac-window-title,
+.vroom-glass.vroom-glass-window-dark .mac-window-title,
+.sky-terminal-window .mac-window-title {
+  color: #cbd5e1 !important;
+}
+
+.mac-window-body {
+  background: #ffffff;
+}
+
+.mac-window-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 6px;
+  display: block;
+  text-align: center;
+}
+
+.vroom-glass-window-dark .mac-window-caption,
+.mac-window.vroom-glass-window-dark .mac-window-caption {
+  color: #cbd5e1 !important;
+}
+
+/* Organic Asymmetric Tilts */
+.tilt-1 { transform: rotate(1.8deg); }
+.tilt-1:hover { transform: rotate(0deg) translateY(-2px); }
+
+.tilt-2 { transform: rotate(3.2deg); }
+.tilt-2:hover { transform: rotate(0deg) translateY(-2px); }
+
+.tilt-neg-1 { transform: rotate(-2.2deg); }
+.tilt-neg-1:hover { transform: rotate(0deg) translateY(-2px); }
+
+.tilt-neg-2 { transform: rotate(-3.5deg); }
+.tilt-neg-2:hover { transform: rotate(0deg) translateY(-2px); }
+
+/* ==================================================
+   2. UNIFIED VROOM BUTTON SYSTEM
+================================================== */
+.vroom-btn-primary,
+.btn-pill-dark {
+  background: #090d16;
+  color: #ffffff;
+  border: 1px solid #090d16;
+  padding: 9px 20px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 2px 5px rgba(9, 13, 22, 0.12);
+  transition: background var(--trans-fast), transform var(--trans-fast);
+  text-decoration: none;
+}
+.vroom-btn-primary:hover,
+.btn-pill-dark:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.vroom-btn-secondary,
+.btn-pill-light,
+.btn-pill-ghost {
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  padding: 9px 20px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all var(--trans-fast);
+  text-decoration: none;
+}
+.vroom-btn-secondary:hover,
+.btn-pill-light:hover,
+.btn-pill-ghost:hover {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.35);
+  transform: translateY(-1px);
+}
+
+.pill-button-pair {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+/* ==================================================
+   3. PREDICTOR TELEMETRY WORKSTATION
+================================================== */
+.workstation-frame {
+  background: #ffffff;
+  border: var(--border-window);
+  border-radius: var(--radius-window);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+}
+
+.workstation-form-body {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vroom-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.vroom-form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vroom-label-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.vroom-select {
+  width: 100%;
+  padding: 9px 12px;
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--trans-fast), background var(--trans-fast);
+}
+.vroom-select:focus {
+  border-color: var(--accent-cyan);
+  background: #ffffff;
+}
+
+.vroom-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vroom-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  outline: none;
+}
+.vroom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform var(--trans-fast);
+}
+.vroom-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.vroom-val-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  min-width: 52px;
+  text-align: center;
+}
+
+.vroom-radio-options {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.vroom-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Timing Monitor Output Window */
+.timing-monitor-box {
+  background: #090d16;
+  color: #ffffff;
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.timing-header-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #38bdf8;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.timing-big-time {
+  font-family: var(--font-mono);
+  font-size: clamp(3rem, 6vw, 4.4rem);
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.timing-seconds-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin-bottom: 2rem;
+}
+
+.timing-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1rem;
+  padding: 1.5rem 0;
+  border-top: 1px dashed #334155;
+  border-bottom: 1px dashed #334155;
+  margin-bottom: 1.75rem;
+}
+
+.timing-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timing-meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timing-meta-val {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.timing-actual-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.timing-actual-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timing-actual-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #cbd5e1;
+  margin-bottom: 2px;
+}
+
+.timing-actual-time {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.delta-badge {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+.delta-badge.delta-good { background: #065f46; color: #6ee7b7; }
+.delta-badge.delta-warn { background: #78350f; color: #fde68a; }
+
+.timing-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+}
+
+/* ==================================================
+   4. RACE LAB TELEMETRY ARCHIVE COMPONENTS
+================================================== */
+.archive-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin: 3rem 0 4rem;
+}
+
+.archive-stat-item {
+  background: var(--canvas-surface);
+  border: var(--border-subtle);
+  border-radius: var(--radius-window);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow-window);
+}
+
+.archive-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.archive-stat-val {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.archive-stat-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Waterfall Pipeline */
+.waterfall-pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  overflow-x: auto;
+}
+
+.waterfall-step {
+  flex: 1;
+  min-width: 140px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.waterfall-step.drop {
+  border-color: #fca5a5;
+  background: #fff5f5;
+}
+.waterfall-step.drop .waterfall-step-val {
+  color: #dc2626;
+}
+
+.waterfall-step.highlight {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+.waterfall-step.highlight .waterfall-step-val {
+  color: #15803d;
+}
+
+.waterfall-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.waterfall-step-val {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.waterfall-step-label {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+
+/* Stint Chart Viewport */
+.chart-viewport-card {
+  margin: 3.5rem 0;
+}
+
+.chart-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 1.5rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chart-legend-toggles {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.toggle-chip {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity var(--trans-fast);
+}
+.toggle-chip.actual { color: #090d16; }
+.toggle-chip.rf-enh { color: #0369a1; }
+.toggle-chip.rf-base { color: #047857; }
+.toggle-chip.ridge-enh { color: #b45309; }
+
+.chart-svg-container {
+  width: 100%;
+  height: 380px;
+  position: relative;
+  background: #ffffff;
+  padding: 1rem;
+}
+
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: #090d16;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Telemetry Tables */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.telemetry-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.telemetry-table th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  font-size: 0.7rem;
+}
+
+.telemetry-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  color: var(--text-secondary);
+}
+
+.telemetry-table tr:hover td {
+  background: #f8fafc;
+}
+
+.telemetry-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  display: inline-block;
+}
+.badge-sky { background: #e0f2fe; color: #0369a1; font-weight: 700; }
+.badge-green { background: #dcfce7; color: #166534; }
+.badge-amber { background: #fef3c7; color: #92400e; }
+.badge-enhanced { background: #fef3c7; color: #b45309; font-weight: 700; }
+.badge-baseline { background: #e0f2fe; color: #0369a1; font-weight: 700; }
+
+.metric-highlight {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.telemetry-insight-box {
+  background: #f0f9ff;
+  border-left: 3px solid var(--accent-cyan);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.telemetry-insight-title {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #0369a1;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.35rem;
+}
+
+.telemetry-insight-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ==================================================
+   5. METHODOLOGY ENGINEERING BLUEPRINT
+================================================== */
+.blueprint-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin: 3.5rem 0;
+}
+
+.blueprint-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+.blueprint-row:last-child {
+  border-bottom: none;
+}
+
+.blueprint-num-col {
+  font-family: var(--font-mono);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent-cyan);
+  line-height: 1;
+}
+
+.blueprint-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.blueprint-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.blueprint-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-transform: lowercase;
+}
+
+.blueprint-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.blueprint-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.blueprint-annotation {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #475569;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* ==================================================
+   6. FRUTIGER AERO SKY ATMOSPHERIC SECTION
+================================================== */
+.sky-atmospheric-section {
+  background: linear-gradient(180deg, #0284c7 0%, #38bdf8 55%, #bae6fd 100%);
+  border-radius: 16px;
+  padding: 5rem 2.5rem;
+  margin: 7rem 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(2, 132, 199, 0.25);
+}
+
+/* Atmospheric Clouds: Contained, zero document-flow footprint */
+.sky-clouds-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.sky-cloud {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+/* Cloud 1: Upper-left atmospheric cloud (middle layer, 45-60s) */
+.sky-cloud-drift-1 {
+  top: 14px;
+  left: -20px;
+  width: 220px;
+  opacity: 0.65;
+  animation: cloudDriftUpperLeft 52s ease-in-out infinite alternate;
+}
+
+/* Cloud 2: Upper-right atmospheric cloud (background layer, 30-45s) */
+.sky-cloud-drift-2 {
+  top: 24px;
+  right: -15px;
+  width: 200px;
+  opacity: 0.45;
+  filter: blur(1.5px);
+  animation: cloudDriftUpperRight 38s ease-in-out infinite alternate;
+}
+
+/* Cloud 3: Bottom-right soft cumulus bank (foreground layer, 60-80s) */
+.sky-cloud-drift-3 {
+  bottom: 18px;
+  right: -25px;
+  width: 260px;
+  opacity: 0.68;
+  animation: cloudDriftBottomRight 68s ease-in-out infinite alternate;
+}
+
+/* Cloud 4: Mid-left periphery wispy cloud (background layer, 30-45s) */
+.sky-cloud-drift-4 {
+  top: 52%;
+  left: 10px;
+  width: 175px;
+  opacity: 0.38;
+  filter: blur(2px);
+  animation: cloudDriftMidLeft 44s ease-in-out infinite alternate;
+}
+
+@keyframes cloudDriftUpperLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(55px, 0, 0);
+  }
+}
+
+@keyframes cloudDriftUpperRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-45px, 0, 0);
+  }
+}
+
+@keyframes cloudDriftBottomRight {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-60px, 0, 0);
+  }
+}
+
+@keyframes cloudDriftMidLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(40px, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-cloud {
+    animation: none !important;
+  }
+}
+
+.sky-section-header {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 3.5rem;
+}
+
+.sky-pill-tag {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0369a1;
+  border-radius: var(--radius-pill);
+  padding: 3px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.sky-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.sky-subtitle {
+  font-size: 1.1rem;
+  color: #e0f2fe;
+}
+
+.sky-benchmark-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 860px;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.sky-model-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-window);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sky-card-header {
+  background: #f8fafc;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sky-card-body {
+  padding: 2rem 1.75rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sky-card-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.sky-card-sub {
+  font-size: 0.8rem;
+  color: #0f172a;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.sky-card-metric {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+.sky-card-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.sky-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: 0.05em;
+}
+.sky-badge.best { color: #0369a1; }
+
+.sky-card-notes {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.accent-blue { color: #0284c7; }
+
+.sky-terminal-window {
+  max-width: 780px;
+  margin: 0 auto;
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-window);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.terminal-header {
+  background: #0f172a;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.terminal-body {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+.terminal-body b { color: #38bdf8; }
+
+/* ==================================================
+   7. CLEAN FAQ ACCORDION
+================================================== */
+.faq-section {
+  max-width: 780px;
+  margin: 7rem auto 4rem;
+}
+
+.faq-item {
+  border-top: 1px solid rgba(15, 23, 42, 0.12);
+  padding: 1.25rem 0;
+}
+.faq-item:last-child {
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.faq-icon {
+  font-size: 1.25rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.faq-answer {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  display: none;
+}
+
+.faq-item.open .faq-answer { display: block; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" width="180" height="120">
+  <defs>
+    <linearGradient id="wheelCarbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="screenGlass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+  </defs>
+
+  <!-- Wheel Body Outline (Carbon fiber plate) -->
+  <path d="M 30 18 L 150 18 Q 168 18 168 36 L 168 84 Q 168 102 148 102 L 126 102 L 120 114 L 60 114 L 54 102 L 32 102 Q 12 102 12 84 L 12 36 Q 12 18 30 18 Z" fill="url(#wheelCarbon)" stroke="#334155" stroke-width="2" />
+
+  <!-- Top RPM LED Array (Green, Red, Blue) -->
+  <g>
+    <!-- Green LEDs -->
+    <circle cx="50" cy="28" r="3.5" fill="#10b981" />
+    <circle cx="62" cy="28" r="3.5" fill="#10b981" />
+    <circle cx="74" cy="28" r="3.5" fill="#10b981" />
+    <!-- Red LEDs -->
+    <circle cx="86" cy="28" r="3.5" fill="#e10600" />
+    <circle cx="98" cy="28" r="3.5" fill="#e10600" />
+    <circle cx="110" cy="28" r="3.5" fill="#e10600" />
+    <!-- Blue / Purple Shift LEDs -->
+    <circle cx="122" cy="28" r="3.5" fill="#0ea5e9" />
+    <circle cx="134" cy="28" r="3.5" fill="#818cf8" />
+  </g>
+
+  <!-- Central LCD Screen Frame -->
+  <rect x="42" y="38" width="96" height="56" rx="3" fill="url(#screenGlass)" stroke="#475569" stroke-width="1.5" />
+
+  <!-- Gear Indicator Large Digits -->
+  <text x="90" y="76" font-family="-apple-system, SF Mono, Menlo, monospace" font-size="34" font-weight="900" fill="#38bdf8" text-anchor="middle">8</text>
+
+  <!-- Delta / Speed / Lap Info -->
+  <text x="50" y="52" font-family="-apple-system, SF Mono, monospace" font-size="7.5" font-weight="700" fill="#10b981">-0.142</text>
+  <text x="50" y="86" font-family="-apple-system, SF Mono, monospace" font-size="7" font-weight="600" fill="#94a3b8">314 KM/H</text>
+
+  <text x="130" y="52" font-family="-apple-system, SF Mono, monospace" font-size="7.5" font-weight="700" fill="#f59e0b" text-anchor="end">L33/71</text>
+  <text x="130" y="86" font-family="-apple-system, SF Mono, monospace" font-size="7" font-weight="600" fill="#ffffff" text-anchor="end">1:07.47</text>
+
+  <!-- Tactile Rotary Dials / Buttons on wheel handles -->
+  <circle cx="26" cy="46" r="6" fill="#e10600" stroke="#991b1b" stroke-width="1.2" />
+  <circle cx="26" cy="68" r="6" fill="#0ea5e9" stroke="#0284c7" stroke-width="1.2" />
+  <circle cx="154" cy="46" r="6" fill="#10b981" stroke="#059669" stroke-width="1.2" />
+  <circle cx="154" cy="68" r="6" fill="#f59e0b" stroke="#d97706" stroke-width="1.2" />
+</svg>

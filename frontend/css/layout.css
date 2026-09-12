@@ -1,0 +1,298 @@
+/**
+ * VROOM Layout Architecture: Canvas, Reference Header & Scaffolding
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background-color: var(--canvas-bg);
+  min-height: 100vh;
+  line-height: 1.55;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle Technical Dot Grid Canvas */
+.aero-sky-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -10;
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.11) 1.1px, transparent 1.1px);
+  background-size: 32px 32px;
+}
+
+/* ==================================================
+   TOP TELEMETRY STRIP (DELIBERATE PRECISION BAR)
+================================================== */
+.telemetry-ticker-bar {
+  background: #090d16;
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  padding: 6px 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1e293b;
+  user-select: none;
+}
+
+.ticker-left-items {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ticker-sep {
+  color: #334155;
+}
+
+.ticker-right-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ticker-badge {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ==================================================
+   GLOBAL VROOM HEADER NAVIGATION
+================================================== */
+.nav-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(253, 253, 252, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--border-hairline);
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.brand-link-logo,
+.brand-link-text {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.header-logo-img {
+  height: 30px;
+  width: auto;
+  max-width: 100px;
+  object-fit: contain;
+  display: block;
+  transition: opacity var(--trans-fast), transform var(--trans-fast);
+}
+
+.brand-link-logo:hover .header-logo-img {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.nav-links-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+}
+
+.nav-link-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 3px 0;
+  transition: color var(--trans-fast);
+}
+
+.nav-link-btn:hover {
+  color: var(--text-primary);
+}
+
+.nav-link-btn.active {
+  color: var(--text-primary);
+  font-weight: 700;
+  border-bottom: 2px solid var(--text-primary);
+}
+
+.nav-right-status {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.header-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  display: inline-block;
+  box-shadow: 0 0 6px var(--accent-green);
+}
+
+.vroom-btn-nav {
+  background: #090d16;
+  color: #ffffff;
+  border: 1px solid #090d16;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--trans-fast), transform var(--trans-fast);
+}
+
+.vroom-btn-nav:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  border-radius: var(--radius-sm);
+  padding: 5px 9px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+/* --- Main Layout Wrapper --- */
+.main-wrapper {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+}
+
+.view-section {
+  display: none;
+  opacity: 0;
+  transition: opacity var(--trans-smooth);
+  padding: 1.5rem 0 6rem;
+}
+
+.view-section.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Site Footer */
+.site-footer {
+  border-top: var(--border-hairline);
+  background: var(--canvas-bg);
+  padding: 4rem 2rem 3rem;
+  margin-top: 6rem;
+}
+
+.footer-inner-grid {
+  max-width: 1000px;
+  margin: 0 auto 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-col h6 {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-col a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  transition: color var(--trans-fast);
+}
+
+.footer-col a:hover {
+  color: var(--text-primary);
+}
+
+/* Brand Signature in Footer */
+.footer-brand-signature {
+  text-align: center;
+  margin: 3.5rem auto 1.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  text-transform: lowercase;
+  user-select: none;
+  opacity: 0.85;
+}
+
+.footer-copy {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2rem;
+}
